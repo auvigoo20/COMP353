@@ -11,20 +11,24 @@ $statement->execute();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scheduled Employees</title>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    
+
 </head>
 <body>
-<h1>List of Scheduled Employees</h1>
-    <a href="./create.php">Add a new Scheduled Employee Record</a>
+<div class="container mt-5">
+    <h1>List of Scheduled Employees</h1>
+    <a href="./create.php" class="btn btn-primary">Add a new Scheduled Employee Record</a>
 
-    <table border='1'>
+    <table class="table table-bordered mt-3">
         <thead>
             <tr>
-                <td>Medicare Number</td>
-                <td>Facility Name</td>
-                <td>Date</td>
-                <td>Start Time</td>
-                <td>End Time</td>
-                <td>Actions</td>
+                <th>Medicare Number</th>
+                <th>Facility Name</th>
+                <th>Date</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -36,14 +40,15 @@ $statement->execute();
                     <td><?= $row["Start_Time"] ?></td>
                     <td><?= $row["End_Time"] ?></td>
                     <td>
-                        <a href="./delete.php?Medicare_Number=<?= $row["Medicare_Number"] ?>&Facility_Name=<?= $row["Facility_Name"] ?>&Date=<?= $row["Date"] ?>&Start_Time=<?= $row["Start_Time"] ?>&End_Time=<?= $row["End_Time"] ?>"><button>Delete</button></a>
-                        <a href="./edit.php?Medicare_Number=<?= $row["Medicare_Number"] ?>&Facility_Name=<?= $row["Facility_Name"] ?>&Date=<?= $row["Date"] ?>&Start_Time=<?= $row["Start_Time"] ?>&End_Time=<?= $row["End_Time"] ?>"><button>Edit</button></a>
+                        <a href="./delete.php?Medicare_Number=<?= $row["Medicare_Number"] ?>&Facility_Name=<?= $row["Facility_Name"] ?>&Date=<?= $row["Date"] ?>&Start_Time=<?= $row["Start_Time"] ?>&End_Time=<?= $row["End_Time"] ?>" class="btn btn-danger">Delete</a>
+                        <a href="./edit.php?Medicare_Number=<?= $row["Medicare_Number"] ?>&Facility_Name=<?= $row["Facility_Name"] ?>&Date=<?= $row["Date"] ?>&Start_Time=<?= $row["Start_Time"] ?>&End_Time=<?= $row["End_Time"] ?>" class="btn btn-info">Edit</a>
                     </td>
                 </tr>
         <?php } ?>
         </tbody>
     </table>
-    <a href="../">Back to homepage</a>
+    <a href="../" class="btn btn-secondary">Back to homepage</a>
+</div>
     
 </body>
 </html>
