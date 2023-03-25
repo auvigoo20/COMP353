@@ -14,17 +14,15 @@ $statement->execute();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" rel="stylesheet" media="screen">
-    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <title>Employees</title>
 </head>
 
 <body>
-    <div style="padding:20px;">
     <h1>List of Employees</h1>
     <a href="./create.php">Add a new employee</a>
 
-    <table class="table table-bordered">
-        <thead class="thead-dark">
+    <table border="1">
+        <thead >
             <tr>
                 <td>Medicare Number</td>
                 <td>First name</td>
@@ -68,9 +66,7 @@ $statement->execute();
         </tbody>
     </table>
     <a href="../">Back to homepage</a>
-    </div>
 
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>
