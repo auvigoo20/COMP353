@@ -1,4 +1,5 @@
-<?php require_once '../database.php';
+<?php 
+require_once '../database.php';
 
 if (
     isset($_POST["Medicare_Number"]) &&
@@ -6,7 +7,7 @@ if (
     isset($_POST["Last_Name"]) &&
     isset($_POST["Date_Of_Birth"]) &&
     isset($_POST["Telephone_Number"]) &&
-    isset($_POST["Address"]) &&
+    isset($_POST["Street_Address"]) &&
     isset($_POST["City"]) &&
     isset($_POST["Province"]) &&
     isset($_POST["Postal_Code"]) &&
@@ -14,17 +15,36 @@ if (
     isset($_POST["Citizenship"]) &&
     isset($_POST["Role"])
 ) {
-    $employee = $conn->prepare(("INSERT INTO hbc353_4.Employees (Medicare_Number, First_Name, Last_Name, Date_Of_Birth, Telephone_Number, Address, City, Province, Postal_Code, Email, Citizenship, Role)
-                                VALUES  (:Medicare_Number, :First_Name, :Last_Name, :Date_Of_Birth, :Telephone_Number, :Address, :City, :Province, :Postal_Code, :Email, :Citizenship, :Role)"));
+
+    // First check if the given address exists
+    $existingAddress = $conn->prepare(("SELECT * FROM hbc353_4.Address AS Address
+                                        WHERE Address.Street_Address = :Street_Address AND Address.Postal_Code = :Postal_Code"));
+    $existingAddress->bindParam(':Street_Address', $_POST["Street_Address"]);
+    $existingAddress->bindParam(':Postal_Code', $_POST["Postal_Code"]);
+    $existingAddress->execute();
+    if ($existingAddress->rowCount() == 0){
+        // Need to add new Address entry since the user's address input does not already exist
+        $newAddress = $conn->prepare(("INSERT INTO hbc353_4.Address
+                                       VALUES (:Street_Address, :Postal_Code, :City, :Province)"));
+        $newAddress->bindParam(':Street_Address', $_POST["Street_Address"]);
+        $newAddress->bindParam(':Postal_Code', $_POST["Postal_Code"]);                       
+        $newAddress->bindParam(':City', $_POST["City"]);                       
+        $newAddress->bindParam(':Province', $_POST["Province"]);        
+        
+        $newAddress->execute();
+    }
+
+
+
+    $employee = $conn->prepare(("INSERT INTO hbc353_4.Employees (Medicare_Number, First_Name, Last_Name, Date_Of_Birth, Telephone_Number, Street_Address, Postal_Code, Email, Citizenship, Role)
+                                VALUES  (:Medicare_Number, :First_Name, :Last_Name, :Date_Of_Birth, :Telephone_Number, :Street_Address, :Postal_Code, :Email, :Citizenship, :Role)"));
 
     $employee->bindParam(':Medicare_Number', $_POST["Medicare_Number"]);
     $employee->bindParam(':First_Name', $_POST["First_Name"]);
     $employee->bindParam(':Last_Name', $_POST["Last_Name"]);
     $employee->bindParam(':Date_Of_Birth', $_POST["Date_Of_Birth"]);
     $employee->bindParam(':Telephone_Number', $_POST["Telephone_Number"]);
-    $employee->bindParam(':Address', $_POST["Address"]);
-    $employee->bindParam(':City', $_POST["City"]);
-    $employee->bindParam(':Province', $_POST["Province"]);
+    $employee->bindParam(':Street_Address', $_POST["Street_Address"]);
     $employee->bindParam(':Postal_Code', $_POST["Postal_Code"]);
     $employee->bindParam(':Email', $_POST["Email"]);
     $employee->bindParam(':Citizenship', $_POST["Citizenship"]);
@@ -66,8 +86,17 @@ if (
         <label for="Telephone_Number">Telephone Number</label>
         <input type="number" name="Telephone_Number" id="Telephone_Number"> <br>
 
-        <label for="Address">Address</label>
-        <input type="text" name="Address" id="Address"> <br>
+        <label for="Email">Email</label>
+        <input type="text" name="Email" id="Email"> <br>
+
+        <label for="Citizenship">Citizenship</label>
+        <input type="text" name="Citizenship" id="Citizenship"> <br>
+
+        <label for="Role">Role</label>
+        <input type="text" name="Role" id="Role"> <br>
+
+        <label for="Address">Street Address</label>
+        <input type="text" name="Street_Address" id="Street_Address"> <br>
 
         <label for="City">City</label>
         <input type="text" name="City" id="City"> <br>
@@ -77,15 +106,6 @@ if (
 
         <label for="Postal_Code">Postal Code</label>
         <input type="text" name="Postal_Code" id="Postal_Code"> <br>
-
-        <label for="Email">Email</label>
-        <input type="text" name="Email" id="Email"> <br>
-
-        <label for="Citizenship">Citizenship</label>
-        <input type="text" name="Citizenship" id="Citizenship"> <br>
-
-        <label for="Role">Role</label>
-        <input type="text" name="Role" id="Role"> <br>
 
         <button type="submit">Add</button>
 
