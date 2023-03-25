@@ -4,6 +4,14 @@ $statement = $conn->prepare("SELECT * FROM hbc353_4.Employees AS employee WHERE 
 $statement->bindParam(':Medicare_Number', $_GET["Medicare_Number"]);
 $statement->execute();
 $employee = $statement->fetch(PDO::FETCH_ASSOC);
+
+// Fetch the employee's current address
+$employeeCurrentAddressStatement = $conn->prepare(("SELECT * FROM hbc353_4.Address AS Address
+                                                    WHERE Address.Street_Address = :Street_Address AND Address.Postal_Code = :Postal_Code"));
+$employeeCurrentAddressStatement->bindParam(':Street_Address', $employee["Street_Address"]);
+$employeeCurrentAddressStatement->bindParam(':Postal_Code', $employee["Postal_Code"]);
+$employeeCurrentAddressStatement->execute();
+$employeeCurrentAddress = $employeeCurrentAddressStatement->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -20,9 +28,9 @@ $employee = $statement->fetch(PDO::FETCH_ASSOC);
     <p>Lase Name: <?= $employee["Last_Name"] ?></p>
     <p>Date of birth: <?= $employee["Date_Of_Birth"] ?></p>
     <p>Telephone number: <?= $employee["Telephone_Number"] ?></p>
-    <p>Address: <?= $employee["Address"] ?></p>
-    <p>City: <?= $employee["City"] ?></p>
-    <p>Province: <?= $employee["Province"] ?></p>
+    <p>Street Address: <?= $employee["Street_Address"] ?></p>
+    <p>City: <?= $employeeCurrentAddress["City"] ?></p>
+    <p>Province: <?= $employeeCurrentAddress["Province"] ?></p>
     <p>Postal Code: <?= $employee["Postal_Code"] ?></p>
     <p>Email: <?= $employee["Email"] ?></p>
     <p>Citizenship: <?= $employee["Citizenship"] ?></p>
