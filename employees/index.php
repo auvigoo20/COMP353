@@ -1,6 +1,8 @@
 <?php require_once '../database.php';
 
-$statement = $conn->prepare('SELECT * FROM hbc353_4.Employees AS Employees');
+$statement = $conn->prepare('SELECT Medicare_Number, First_Name, Last_Name, Date_Of_Birth, Telephone_Number, Email, Citizenship, Role, Address.Street_Address AS Street_Address, Address.City AS City, Address.Province AS Province, Address.Postal_Code AS Postal_Code 
+                            FROM hbc353_4.Employees AS Employees, hbc353_4.Address AS Address
+                            WHERE Employees.Street_Address = Address.Street_Address and Employees.Postal_Code = Address.Postal_Code');
 $statement->execute();
 ?>
 
@@ -11,29 +13,31 @@ $statement->execute();
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" rel="stylesheet" media="screen">
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <title>Employees</title>
 </head>
 
 <body>
+    <div style="padding:20px;">
     <h1>List of Employees</h1>
     <a href="./create.php">Add a new employee</a>
 
-    <table>
-        <thead>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
             <tr>
                 <td>Medicare Number</td>
                 <td>First name</td>
                 <td>Last name</td>
                 <td>Date of birth</td>
                 <td>Telephone Number</td>
-                <td>Address</td>
-                <td>City</td>
-                <td>Province</td>
-                <td>Postal code</td>
                 <td>Email</td>
                 <td>Citizenship</td>
                 <td>Role</td>
+                <td>Street Address</td>
+                <td>City</td>
+                <td>Province</td>
+                <td>Postal code</td>
                 <td>Actions</td>
             </tr>
         </thead>
@@ -45,13 +49,13 @@ $statement->execute();
                     <td><?= $row["Last_Name"] ?></td>
                     <td><?= $row["Date_Of_Birth"] ?></td>
                     <td><?= $row["Telephone_Number"] ?></td>
-                    <td><?= $row["Address"] ?></td>
-                    <td><?= $row["City"] ?></td>
-                    <td><?= $row["Province"] ?></td>
-                    <td><?= $row["Postal_Code"] ?></td>
                     <td><?= $row["Email"] ?></td>
                     <td><?= $row["Citizenship"] ?></td>
                     <td><?= $row["Role"] ?></td>
+                    <td><?= $row["Street_Address"] ?></td>
+                    <td><?= $row["City"] ?></td>
+                    <td><?= $row["Province"] ?></td>
+                    <td><?= $row["Postal_Code"] ?></td>
                     <td>
                     <a href="./show.php?Medicare_Number=<?= $row["Medicare_Number"] ?>">Show</a>
 
@@ -64,6 +68,9 @@ $statement->execute();
         </tbody>
     </table>
     <a href="../">Back to homepage</a>
+    </div>
+
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>
