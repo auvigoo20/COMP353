@@ -100,14 +100,14 @@ if (
             <option value="cashier">cashier</option>
             <option value="pharmacist">pharmacist</option>
             <option value="receptionist">receptionist</option>
-            <option value="administrative personel">administrative personel</option>
-            <option value="security personel">security personel</option>
+            <option value="administrative personnel">administrative personnel</option>
+            <option value="security personnel">security personnel</option>
             <option value="regular employee">regular employee</option>
         </select>
             
         <br>
 
-        <label for="Address">Street Address</label>
+        <label for="Street_Address">Street Address</label>
         <input type="text" name="Street_Address" id="Street_Address"> <br>
 
         <label for="City">City</label>
