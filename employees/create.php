@@ -93,7 +93,19 @@ if (
         <input type="text" name="Citizenship" id="Citizenship"> <br>
 
         <label for="Role">Role</label>
-        <input type="text" name="Role" id="Role"> <br>
+        <select name="Role" id="Role">
+            <option value="">--Please choose an option--</option>
+            <option value="nurse">nurse</option>
+            <option value="doctor">doctor</option>
+            <option value="cashier">cashier</option>
+            <option value="pharmacist">pharmacist</option>
+            <option value="receptionist">receptionist</option>
+            <option value="administrative personel">administrative personel</option>
+            <option value="security personel">security personel</option>
+            <option value="regular employee">regular employee</option>
+        </select>
+            
+        <br>
 
         <label for="Address">Street Address</label>
         <input type="text" name="Street_Address" id="Street_Address"> <br>
@@ -102,7 +114,24 @@ if (
         <input type="text" name="City" id="City"> <br>
 
         <label for="Province">Province</label>
-        <input type="text" name="Province" id="Province"> <br>
+        <select name="Province" id="Province"> 
+            <option value="">--Please choose an option--</option>
+            <option value="AB">Alberta</option>
+            <option value="BC">British Columbia</option>
+            <option value="MB">Manitoba</option>
+            <option value="NB">New Brunswick</option>
+            <option value="NL">Newfoundland and Labrador</option>
+            <option value="NT">Northwest Territories</option>
+            <option value="NS">Nova Scotia</option>
+            <option value="NU">Nunavut</option>
+            <option value="ON">Ontario</option>
+            <option value="PE">Prince Edward Island</option>
+            <option value="QC">Quebec</option>
+            <option value="SK">Saskatchewan</option>
+            <option value="YT">Yukon</option>
+        </select>
+        
+        <br>
 
         <label for="Postal_Code">Postal Code</label>
         <input type="text" name="Postal_Code" id="Postal_Code"> <br>
