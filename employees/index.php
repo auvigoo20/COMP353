@@ -31,9 +31,9 @@ $statement->execute();
         <thead >
             <tr>
                 <td>Medicare Number</td>
-                <td>First name</td>
-                <td>Last name</td>
-                <td>Date of birth</td>
+                <td>First Name</td>
+                <td>Last Name</td>
+                <td>Date of Birth</td>
                 <td>Telephone Number</td>
                 <td>Email</td>
                 <td>Citizenship</td>
@@ -41,7 +41,7 @@ $statement->execute();
                 <td>Street Address</td>
                 <td>City</td>
                 <td>Province</td>
-                <td>Postal code</td>
+                <td>Postal Code</td>
                 <td>Actions</td>
             </tr>
         </thead>
