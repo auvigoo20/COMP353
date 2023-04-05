@@ -34,23 +34,29 @@ if (
         $newAddress->execute();
     }
 
-
-
-    $employee = $conn->prepare(("INSERT INTO hbc353_4.Employees (Medicare_Number, First_Name, Last_Name, Date_Of_Birth, Telephone_Number, Street_Address, Postal_Code, Email, Citizenship, Role)
-                                VALUES  (:Medicare_Number, :First_Name, :Last_Name, :Date_Of_Birth, :Telephone_Number, :Street_Address, :Postal_Code, :Email, :Citizenship, :Role)"));
+    $employee = $conn->prepare(("INSERT INTO hbc353_4.Employees (Medicare_Number, First_Name, Last_Name, Date_Of_Birth, Telephone_Number, Email, Citizenship, Role)
+                                VALUES  (:Medicare_Number, :First_Name, :Last_Name, :Date_Of_Birth, :Telephone_Number, :Email, :Citizenship, :Role)"));
 
     $employee->bindParam(':Medicare_Number', $_POST["Medicare_Number"]);
     $employee->bindParam(':First_Name', $_POST["First_Name"]);
     $employee->bindParam(':Last_Name', $_POST["Last_Name"]);
     $employee->bindParam(':Date_Of_Birth', $_POST["Date_Of_Birth"]);
     $employee->bindParam(':Telephone_Number', $_POST["Telephone_Number"]);
-    $employee->bindParam(':Street_Address', $_POST["Street_Address"]);
-    $employee->bindParam(':Postal_Code', $_POST["Postal_Code"]);
     $employee->bindParam(':Email', $_POST["Email"]);
     $employee->bindParam(':Citizenship', $_POST["Citizenship"]);
     $employee->bindParam(':Role', $_POST["Role"]);
 
-    if ($employee->execute()) {
+    $employee->execute();
+
+
+    // Create new record for Lives table
+    $lives = $conn->prepare(("INSERT INTO hbc353_4.Lives(Medicare_Number, Street_Address, Postal_Code) 
+                                VALUES(:Medicare_Number, :Street_Address, :Postal_Code)"));
+    $lives->bindParam(':Medicare_Number',$_POST["Medicare_Number"]);
+    $lives->bindParam(':Street_Address',$_POST["Street_Address"]);
+    $lives->bindParam(':Postal_Code',$_POST["Postal_Code"]);
+
+    if ($lives->execute()) {
         header("Location: .");
     }
 }

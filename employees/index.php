@@ -1,8 +1,14 @@
 <?php require_once '../database.php';
 
-$statement = $conn->prepare('SELECT Medicare_Number, First_Name, Last_Name, Date_Of_Birth, Telephone_Number, Email, Citizenship, Role, Address.Street_Address AS Street_Address, Address.City AS City, Address.Province AS Province, Address.Postal_Code AS Postal_Code 
-                            FROM hbc353_4.Employees AS Employees, hbc353_4.Address AS Address
-                            WHERE Employees.Street_Address = Address.Street_Address and Employees.Postal_Code = Address.Postal_Code');
+$statement = $conn->prepare('SELECT Employees.Medicare_Number, First_Name, Last_Name, Date_Of_Birth, Telephone_Number, Email, Citizenship, Role,
+                             Address.Street_Address AS Street_Address, 
+                             Address.City AS City, 
+                             Address.Province AS Province, 
+                             Address.Postal_Code AS Postal_Code 
+                            FROM hbc353_4.Employees AS Employees, hbc353_4.Lives AS Lives, hbc353_4.Address as Address 
+                            WHERE Employees.Medicare_Number = Lives.Medicare_Number and 
+                            Lives.Postal_Code = Address.Postal_Code and 
+                            Lives.Street_Address = Address.Street_Address');
 $statement->execute();
 ?>
 

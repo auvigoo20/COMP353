@@ -9,6 +9,7 @@
 <body>
     <h1>Welcome!</h1>
     <p>Choose one of the following links:</p>
-    <a href="./employees/">Employees</a>    
+    <a href="./employees/">Employees</a><br/>
+    <a href="./facilities/">Facilities</a>   
 </body>
 </html>
