@@ -13,10 +13,16 @@ $statement->execute();
 $employee = $statement->fetch(PDO::FETCH_ASSOC);
 
 // Fetch the employee's current address to autofill the form
+$employeeLivesStatement = $conn->prepare(("SELECT * FROM hbc353_4.Lives AS Lives
+                                            WHERE Lives.Medicare_Number = :Medicare_Number"));
+$employeeLivesStatement->bindParam(':Medicare_Number', $employee["Medicare_Number"]);
+$employeeLivesStatement->execute();
+$employeeLives = $employeeLivesStatement->fetch(PDO::FETCH_ASSOC);
+
 $employeeCurrentAddressStatement = $conn->prepare(("SELECT * FROM hbc353_4.Address AS Address
                                                     WHERE Address.Street_Address = :Street_Address AND Address.Postal_Code = :Postal_Code"));
-$employeeCurrentAddressStatement->bindParam(':Street_Address', $employee["Street_Address"]);
-$employeeCurrentAddressStatement->bindParam(':Postal_Code', $employee["Postal_Code"]);
+$employeeCurrentAddressStatement->bindParam(':Street_Address', $employeeLives["Street_Address"]);
+$employeeCurrentAddressStatement->bindParam(':Postal_Code', $employeeLives["Postal_Code"]);
 $employeeCurrentAddressStatement->execute();
 $employeeCurrentAddress = $employeeCurrentAddressStatement->fetch(PDO::FETCH_ASSOC);
 
@@ -35,33 +41,54 @@ if (
     isset($_POST["Role"])
 ) {
 
-        // First check if the given address exists
-        $existingAddress = $conn->prepare(("SELECT * FROM hbc353_4.Address AS Address
-        WHERE Address.Street_Address = :Street_Address AND Address.Postal_Code = :Postal_Code"));
-        $existingAddress->bindParam(':Street_Address', $_POST["Street_Address"]);
-        $existingAddress->bindParam(':Postal_Code', $_POST["Postal_Code"]);
-        $existingAddress->execute();
+    // Create new Address entry if needed
+    // First check if the given address exists
+    $existingAddress = $conn->prepare(("SELECT * FROM hbc353_4.Address AS Address
+                                        WHERE Address.Street_Address = :Street_Address AND Address.Postal_Code = :Postal_Code"));
+    $existingAddress->bindParam(':Street_Address', $_POST["Street_Address"]);
+    $existingAddress->bindParam(':Postal_Code', $_POST["Postal_Code"]);
+    $existingAddress->execute();
         if ($existingAddress->rowCount() == 0){
-        // Need to add new Address entry since the user's address input does not already exist
-        $newAddress = $conn->prepare(("INSERT INTO hbc353_4.Address
-            VALUES (:Street_Address, :Postal_Code, :City, :Province)"));
-        $newAddress->bindParam(':Street_Address', $_POST["Street_Address"]);
-        $newAddress->bindParam(':Postal_Code', $_POST["Postal_Code"]);                       
-        $newAddress->bindParam(':City', $_POST["City"]);                       
-        $newAddress->bindParam(':Province', $_POST["Province"]);        
+            // Need to add new Address entry since the user's address input does not already exist
+            $newAddress = $conn->prepare(("INSERT INTO hbc353_4.Address
+                                            VALUES (:Street_Address, :Postal_Code, :City, :Province)"));
+            $newAddress->bindParam(':Street_Address', $_POST["Street_Address"]);
+            $newAddress->bindParam(':Postal_Code', $_POST["Postal_Code"]);                       
+            $newAddress->bindParam(':City', $_POST["City"]);                       
+            $newAddress->bindParam(':Province', $_POST["Province"]);        
 
-        $newAddress->execute();
+            $newAddress->execute();
+        }
+        else{
+            $updatedAddress = $conn->prepare(("UPDATE hbc353_4.Address AS Address
+                                                SET Address.City = :City, Address.Province = :Province 
+                                                WHERE Address.Street_Address = :Street_Address AND 
+                                                Address.Postal_Code = :Postal_Code"));
+            $updatedAddress->bindParam(':Street_Address', $_POST["Street_Address"]);
+            $updatedAddress->bindParam(':Postal_Code', $_POST["Postal_Code"]);                       
+            $updatedAddress->bindParam(':City', $_POST["City"]);                       
+            $updatedAddress->bindParam(':Province', $_POST["Province"]);   
+            $updatedAddress->execute();
+ 
         }
 
+    // Update the Lives entry
+    $lives = $conn->prepare(("UPDATE hbc353_4.Lives AS Lives
+                                SET Lives.Street_Address = :Street_Address, Lives.Postal_Code = :Postal_Code
+                                WHERE Lives.Medicare_Number = :Medicare_Number"));
+    $lives->bindParam(':Street_Address', $_POST["Street_Address"]);
+    $lives->bindParam(':Postal_Code', $_POST["Postal_Code"]);
+    $lives->bindParam(':Medicare_Number', $_POST["Medicare_Number"]);
+    $lives->execute();
+        
 
+    // Update the Employees entry
     $employee = $conn->prepare("UPDATE hbc353_4.Employees 
                                 SET Medicare_Number = :Medicare_Number,
                                     First_Name = :First_Name,
                                     Last_Name = :Last_Name,
                                     Date_Of_Birth = :Date_Of_Birth,
                                     Telephone_Number = :Telephone_Number,
-                                    Street_Address = :Street_Address,
-                                    Postal_Code = :Postal_Code,
                                     Email = :Email,
                                     Citizenship = :Citizenship,
                                     Role = :Role
@@ -72,8 +99,6 @@ if (
     $employee->bindParam(':Last_Name', $_POST["Last_Name"]);
     $employee->bindParam(':Date_Of_Birth', $_POST["Date_Of_Birth"]);
     $employee->bindParam(':Telephone_Number', $_POST["Telephone_Number"]);
-    $employee->bindParam(':Street_Address', $_POST["Street_Address"]);
-    $employee->bindParam(':Postal_Code', $_POST["Postal_Code"]);
     $employee->bindParam(':Email', $_POST["Email"]);
     $employee->bindParam(':Citizenship', $_POST["Citizenship"]);
     $employee->bindParam(':Role', $_POST["Role"]);
@@ -138,7 +163,7 @@ if (
         <br>
 
         <label for="Street_Address">Street Address</label>
-        <input type="text" name="Street_Address" id="Street_Address" value="<?= $employee["Street_Address"] ?>"> <br>
+        <input type="text" name="Street_Address" id="Street_Address" value="<?= $employeeCurrentAddress["Street_Address"] ?>"> <br>
 
         <label for="City">City</label>
         <input type="text" name="City" id="City" value="<?= $employeeCurrentAddress["City"] ?>"> <br>
@@ -163,7 +188,7 @@ if (
         <br>
 
         <label for="Postal_Code">Postal Code</label>
-        <input type="text" name="Postal_Code" id="Postal_Code" value="<?= $employee["Postal_Code"] ?>"> <br>
+        <input type="text" name="Postal_Code" id="Postal_Code" value="<?= $employeeCurrentAddress["Postal_Code"] ?>"> <br>
 
         <button type="submit">Update</button>
 
