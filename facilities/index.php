@@ -11,7 +11,7 @@ $statement = $conn->prepare('SELECT Facilities.Name, Phone_Number, Capacity, Web
                             Address.Street_Address = Located.Street_Address');
 $statement->execute();
 ?>
-<!-- Start of doc -->
+ 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +19,7 @@ $statement->execute();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faiclities</title>
+    <title>Facilities</title>
 </head>
 
 <body>
