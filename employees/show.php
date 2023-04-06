@@ -41,6 +41,8 @@ $employeeCurrentAddress = $employeeCurrentAddressStatement->fetch(PDO::FETCH_ASS
     <p>Email: <?= $employee["Email"] ?></p>
     <p>Citizenship: <?= $employee["Citizenship"] ?></p>
     <p>Role: <?= $employee["Role"] ?></p>
+
+    <a href="./">Back to employeees list</a>
     
 </body>
 </html>

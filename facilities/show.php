@@ -37,5 +37,7 @@ $facilityCurrentAddress = $facilityCurrentAddressStatement->fetch(PDO::FETCH_ASS
     <p>City: <?= $facilityCurrentAddress["City"] ?></p>
     <p>Postal Code: <?= $facilityCurrentAddress["Postal_Code"] ?></p>
     <p>Province: <?= $facilityCurrentAddress["Province"] ?></p>
+
+    <a href="./">Back to facilities list</a>
 </body>
 </html>

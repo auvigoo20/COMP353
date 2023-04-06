@@ -130,7 +130,7 @@ if (
 
 
     </form>
-    <a href="./">Back to employee list</a>
+    <a href="./">Back to facilities list</a>
 
 </body>
 

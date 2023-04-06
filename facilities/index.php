@@ -63,6 +63,7 @@ $statement->execute();
             <?php } ?>
         </tbody>
     </table>
+    <a href="../">Back to homepage</a>
 </body>
 
 </html>

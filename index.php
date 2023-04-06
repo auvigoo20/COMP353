@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Welcome!</h1>
+    <h1>Welcome to the Health Facility Employee Status Tracking System!</h1>
     <p>Choose one of the following links:</p>
     <a href="./employees/">Employees</a><br/>
     <a href="./facilities/">Facilities</a>   
