@@ -24,7 +24,7 @@ $statement->execute();
 
 <body>
     <h1>List of Facilities</h1>
-    <a href="./create.php">Add a new Facility</a>
+    <a href="./create.php">Add a new facility</a>
 
     <table border="1">
         <thead>

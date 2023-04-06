@@ -10,6 +10,8 @@
     <h1>Welcome to the Health Facility Employee Status Tracking System!</h1>
     <p>Choose one of the following links:</p>
     <a href="./employees/">Employees</a><br/>
-    <a href="./facilities/">Facilities</a>   
+    <a href="./facilities/">Facilities</a><br/>
+    <a href="./infections/">Infections</a><br/>   
+    <a href="./vaccines/">Vaccines</a>   
 </body>
 </html>
