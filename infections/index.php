@@ -21,6 +21,7 @@ $statement->execute();
         <thead >
             <tr>
                 <td>Type</td>
+                <td>Description</td>
                 <td>Actions</td>
             </tr>
         </thead>
@@ -28,9 +29,9 @@ $statement->execute();
             <?php while ($row = $statement->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) { ?>
                 <tr>
                     <td><?= $row["Type"] ?></td>
+                    <td><?= $row["Description"] ?></td>
                     <td>
                     <a href="./show.php?Type=<?= $row["Type"] ?>">Show</a>
-
                         <a href="./edit.php?Type=<?= $row["Type"] ?>">Edit</a>
                         <a href="./delete.php?Type=<?= $row["Type"] ?>">Delete</a>
                     </td>

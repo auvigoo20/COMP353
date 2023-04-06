@@ -128,7 +128,7 @@ if (
 
     <form action="./edit.php" method="post">
         <label for="Medicare_Number">Medicare Number</label>
-        <input type="text" name="Medicare_Number" id="Medicare_Number" value="<?= $employee["Medicare_Number"] ?>"> <br>
+        <input type="text" name="Medicare_Number" id="Medicare_Number" value="<?= $employee["Medicare_Number"] ?>" readonly> <br>
 
         <label for="First_Name">First Name</label>
         <input type="text" name="First_Name" id="First_Name" value="<?= $employee["First_Name"] ?>"> <br>

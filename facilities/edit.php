@@ -114,7 +114,7 @@ if (
 
     <form action="./edit.php" method="post">
         <label for="Name">Name</label>
-        <input type="text" name="Name" id="Name" value="<?= $facility["Name"] ?>"> <br>
+        <input type="text" name="Name" id="Name" value="<?= $facility["Name"] ?>" readonly> <br>
 
         <label for="Phone_Number">Phone Number</label>
         <input type="text" name="Phone_Number" id="Phone_Number" value="<?= $facility["Phone_Number"] ?>"> <br>
