@@ -15,7 +15,9 @@
     <a href="./vaccines/">Vaccines</a> <br/>   
     <a href="./works/">Works</a><br/>
     <a href="./manages/">Managers</a><br/>
-    <a href="./infected/">Infected Employees</a>   
+    <a href="./infected/">Infected Employees</a><br/>  
+    <a href="./vaccinated/">Vaccinated Employees</a>   
+
 
 </body>
 </html>
