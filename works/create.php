@@ -14,16 +14,39 @@ if (
     isset($_POST['Start_Date']) &&
     isset($_POST['End_Date'])
 ) {
-    $newWorks = $conn->prepare(("INSERT INTO hbc353_4.Works VALUES (:Medicare_Number, :Facility_Name, :Start_Date, :End_Date)"));
-    $newWorks->bindParam(':Medicare_Number', $_POST['Medicare_Number']);
-    $newWorks->bindParam(':Facility_Name', $_POST['Facility_Name']);
-    $newWorks->bindParam(':Start_Date', $_POST['Start_Date']);
-    if($_POST['End_Date'] == ''){
-        $_POST['End_Date'] = null;
-    }
-    $newWorks->bindParam(':End_Date', $_POST['End_Date']);
-    if ($newWorks->execute()) {
+    // Fetch the current facility
+    $currentFacilityStatement = $conn->prepare("SELECT * FROM hbc353_4.Facilities AS Facilities WHERE Facilities.Name = :Facility_Name");
+    $currentFacilityStatement->bindParam(':Facility_Name', $_POST['Facility_Name']);
+    $currentFacilityStatement->execute();
+    $currentFacility = $currentFacilityStatement->fetch(PDO::FETCH_ASSOC);
+    $capacity = $currentFacility['Capacity'];
+
+    // Fetch the current number of employees working in the selected facility
+    $worksStatement = $conn->prepare("SELECT COUNT(Medicare_Number) AS 'numOfEmployees'
+                                      FROM hbc353_4.Works
+                                      WHERE Facility_Name = :Facility_Name AND End_Date IS NULL
+                                      GROUP BY Facility_Name");
+    $worksStatement->bindParam(':Facility_Name', $_POST['Facility_Name']);
+    $worksStatement->execute();
+    $works = $worksStatement->fetch(PDO::FETCH_ASSOC);
+    $numOfEmployees = $works['numOfEmployees'];
+
+    // check to see if maximum facility capacity has been reached
+    if($capacity <$numOfEmployees ){
+        // Add a new works record
+        $newWorks = $conn->prepare(("INSERT INTO hbc353_4.Works VALUES (:Medicare_Number, :Facility_Name, :Start_Date, :End_Date)"));
+        $newWorks->bindParam(':Medicare_Number', $_POST['Medicare_Number']);
+        $newWorks->bindParam(':Facility_Name', $_POST['Facility_Name']);
+        $newWorks->bindParam(':Start_Date', $_POST['Start_Date']);
+        if($_POST['End_Date'] == ''){
+            $_POST['End_Date'] = null;
+        }
+        $newWorks->bindParam(':End_Date', $_POST['End_Date']);
+        if ($newWorks->execute()) {
         header("Location: .");
+        }
+    }else{
+        echo '<script>alert("Capacity is reached")</script>';
     }
 }
 ?>
