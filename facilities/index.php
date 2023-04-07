@@ -1,17 +1,44 @@
 <?php require_once '../database.php';
-$statement = $conn->prepare('SELECT Facilities.Name, Phone_Number, Capacity, Web_Address, Type,
-                            Address.Street_Address AS Street_Address, 
-                             Address.City AS City, 
-                             Address.Province AS Province, 
-                             Address.Postal_Code AS Postal_Code 
-                            FROM hbc353_4.Facilities AS Facilities, hbc353_4.Located AS Located,
-                            hbc353_4.Address AS Address
-                            WHERE Facilities.Name = Located.Facility_Name AND 
-                            Located.Postal_Code = Address.Postal_Code AND
-                            Address.Street_Address = Located.Street_Address');
+
+$statement = $conn->prepare('SELECT f.Name,
+                                    a.Street_Address,
+                                    a.City,
+                                    a.Province,
+                                    a.Postal_Code,
+                                    f.Phone_Number,
+                                    f.Web_Address,
+                                    f.Type,
+                                    f.Capacity,
+                                    CONCAT(e.First_Name, " ", e.Last_Name) AS Manager_Name,
+                                    COUNT(w.Medicare_Number) AS Number_of_Employees
+                                FROM
+                                hbc353_4.Facilities AS f
+                                LEFT JOIN
+                                hbc353_4.Manages AS m ON f.Name = m.Facility_Name
+                                LEFT JOIN
+                                hbc353_4.Employees AS e ON m.Medicare_Number = e.Medicare_Number
+                                LEFT JOIN
+                                hbc353_4.Works AS w ON f.Name = w.Facility_Name AND w.End_Date is null
+                                LEFT JOIN
+                                hbc353_4.Located AS l on f.Name = l.Facility_Name
+                                LEFT JOIN
+                                hbc353_4.Address AS a on a.Postal_Code = l.Postal_Code and a.Street_Address = l.Street_Address
+                                GROUP BY
+                                    f.Name,
+                                    f.Phone_Number,
+                                    f.web_address,
+                                    f.Type,
+                                    a.Province,
+                                    a.City
+                                ORDER BY
+                                    a.Province ASC,
+                                    a.City ASC,
+                                    f.Type ASC,
+                                    Number_of_Employees ASC');
+
 $statement->execute();
 ?>
- 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,14 +57,16 @@ $statement->execute();
         <thead>
             <tr>
                 <td>Name</td>
-                <td>Phone Number</td>
-                <td>Capacity</td>
-                <td>Web Address</td>
-                <td>Type</td>
                 <td>Street Address</td>
                 <td>City</td>
                 <td>Province</td>
                 <td>Postal Code</td>
+                <td>Phone Number</td>
+                <td>Web Address</td>
+                <td>Type</td>
+                <td>Capacity</td>
+                <td>Manager Name</td>
+                <td>Number of Employees</td>                
                 <td>Actions</td>
             </tr>
         </thead>
@@ -45,14 +74,16 @@ $statement->execute();
             <?php while ($row = $statement->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) { ?>
                 <tr>
                     <td><?= $row["Name"] ?></td>
-                    <td><?= $row["Phone_Number"] ?></td>
-                    <td><?= $row["Capacity"] ?></td>
-                    <td><?= $row["Web_Address"] ?></td>
-                    <td><?= $row["Type"] ?></td>
                     <td><?= $row["Street_Address"] ?></td>
                     <td><?= $row["City"] ?></td>
                     <td><?= $row["Province"] ?></td>
                     <td><?= $row["Postal_Code"] ?></td>
+                    <td><?= $row["Phone_Number"] ?></td>
+                    <td><?= $row["Web_Address"] ?></td>
+                    <td><?= $row["Type"] ?></td>
+                    <td><?= $row["Capacity"] ?></td>
+                    <td><?= $row["Manager_Name"] ?></td>
+                    <td><?= $row["Number_of_Employees"] ?></td>
                     <td>
                         <a href="./show.php?Name=<?= $row["Name"] ?>">Show</a>
                         <a href="./edit.php?Name=<?= $row["Name"] ?>">Edit</a>
