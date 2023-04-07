@@ -24,7 +24,7 @@ if (isset($_POST["Type"])){
 </head>
 <body>
 
-<h1>Add Facility</h1>
+<h1>Add Infection</h1>
 
     <form action="./create.php" method="post">
         <label for="Type">Type</label>

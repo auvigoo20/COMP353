@@ -11,7 +11,12 @@
     <p>Choose one of the following links:</p>
 <ul>
     <li><a href="./employees/">All Employees</a></li>
-    <li><a href="./facilities/">Facilities</a></li>
+    <li>
+        <a href="./facilities/">Facilities</a>
+        <ul>
+            <li><a href="./facilities/Q13.php/">Facilities Infected with COVID-19 in the Last 2 Weeks(Q13)</a></li>
+        </ul>
+    </li>
     <li><a href="./infections/">Infections</a></li>   
     <li><a href="./vaccines/">Vaccines</a></li>
     <li><a href="./works/">Works</a></li>
@@ -19,7 +24,7 @@
     <li>
         <a href="./infected/">Infected Employees</a>
         <ul>
-            <li><a href="./infected/Q9.php/">Doctors Infected with COVID-19 in the Last 2 Weeks</a></li>
+            <li><a href="./infected/Q9.php/">Doctors Infected with COVID-19 in the Last 2 Weeks(Q9)</a></li>
         </ul>
     </li>
     <li><a href="./vaccinated/">Vaccinated Employees</a></li>
