@@ -14,7 +14,7 @@ $statement->execute();
 </head>
 <body>
 
-<h1>List of Infectiosn</h1>
+<h1>List of Infections</h1>
     <a href="./create.php">Add a new infection</a>
 
     <table border="1">
@@ -31,9 +31,9 @@ $statement->execute();
                     <td><?= $row["Type"] ?></td>
                     <td><?= $row["Description"] ?></td>
                     <td>
-                    <a href="./show.php?Type=<?= $row["Type"] ?>">Show</a>
-                        <a href="./edit.php?Type=<?= $row["Type"] ?>">Edit</a>
-                        <a href="./delete.php?Type=<?= $row["Type"] ?>">Delete</a>
+                    <a href="./show.php?Type=<?= $row["Type"] ?>"><button>Show</button></a>
+                        <a href="./edit.php?Type=<?= $row["Type"] ?>"><button>Edit</button></a>
+                        <a href="./delete.php?Type=<?= $row["Type"] ?>"><button>Delete</button></a>
                     </td>
                 </tr>
 

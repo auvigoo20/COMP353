@@ -61,10 +61,10 @@ $statement->execute();
                     <td><?= $row["Province"] ?></td>
                     <td><?= $row["Postal_Code"] ?></td>
                     <td>
-                    <a href="./show.php?Medicare_Number=<?= $row["Medicare_Number"] ?>">Show</a>
+                    <a href="./show.php?Medicare_Number=<?= $row["Medicare_Number"] ?>"><button>Show</button></a>
 
-                        <a href="./edit.php?Medicare_Number=<?= $row["Medicare_Number"] ?>">Edit</a>
-                        <a href="./delete.php?Medicare_Number=<?= $row["Medicare_Number"] ?>">Delete</a>
+                        <a href="./edit.php?Medicare_Number=<?= $row["Medicare_Number"] ?>"><button>Edit</button></a>
+                        <a href="./delete.php?Medicare_Number=<?= $row["Medicare_Number"] ?>"><button>Delete</button></a>
                     </td>
                 </tr>
 
