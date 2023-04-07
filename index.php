@@ -12,6 +12,7 @@
     <a href="./employees/">All Employees</a><br/>
     <a href="./facilities/">Facilities</a><br/>
     <a href="./infections/">Infections</a><br/>   
-    <a href="./vaccines/">Vaccines</a>   
+    <a href="./vaccines/">Vaccines</a> <br/>   
+    <a href="./works/">Works</a>   
 </body>
 </html>
