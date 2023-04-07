@@ -32,7 +32,7 @@ if (
     $numOfEmployees = $works['numOfEmployees'];
 
     // check to see if maximum facility capacity has been reached
-    if($capacity <$numOfEmployees ){
+    if($capacity > $numOfEmployees ){
         // Add a new works record
         $newWorks = $conn->prepare(("INSERT INTO hbc353_4.Works VALUES (:Medicare_Number, :Facility_Name, :Start_Date, :End_Date)"));
         $newWorks->bindParam(':Medicare_Number', $_POST['Medicare_Number']);

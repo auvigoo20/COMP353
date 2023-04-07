@@ -9,15 +9,22 @@
 <body>
     <h1>Welcome to the Health Facility Employee Status Tracking System!</h1>
     <p>Choose one of the following links:</p>
-    <a href="./employees/">All Employees</a><br/>
-    <a href="./facilities/">Facilities</a><br/>
-    <a href="./infections/">Infections</a><br/>   
-    <a href="./vaccines/">Vaccines</a> <br/>   
-    <a href="./works/">Works</a><br/>
-    <a href="./manages/">Managers</a><br/>
-    <a href="./infected/">Infected Employees</a><br/>  
-    <a href="./vaccinated/">Vaccinated Employees</a><br/>
-    <a href="./scheduled/">Scheduled Employees</a>   
+<ul>
+    <li><a href="./employees/">All Employees</a></li>
+    <li><a href="./facilities/">Facilities</a></li>
+    <li><a href="./infections/">Infections</a></li>   
+    <li><a href="./vaccines/">Vaccines</a></li>
+    <li><a href="./works/">Works</a></li>
+    <li><a href="./manages/">Managers</a></li>
+    <li>
+        <a href="./infected/">Infected Employees</a>
+        <ul>
+            <li><a href="./infected/Q9.php/">Doctors Infected with COVID-19 in the Last 2 Weeks</a></li>
+        </ul>
+    </li>
+    <li><a href="./vaccinated/">Vaccinated Employees</a></li>
+    <li><a href="./scheduled/">Scheduled Employees</a></li>
+</ul>   
 
 </body>
 </html>
