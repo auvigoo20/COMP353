@@ -1,5 +1,6 @@
 <?php require_once '../database.php';
-$statement = $conn->prepare('SELECT * FROM Scheduled');
+$statement = $conn->prepare('SELECT * FROM Scheduled
+                             ORDER BY Medicare_Number ASC, Date ASC, Start_Time ASC');
 $statement->execute();
 ?>
 
@@ -23,6 +24,7 @@ $statement->execute();
                 <td>Date</td>
                 <td>Start Time</td>
                 <td>End Time</td>
+                <td>Actions</td>
             </tr>
         </thead>
         <tbody>
@@ -35,6 +37,7 @@ $statement->execute();
                     <td><?= $row["End_Time"] ?></td>
                     <td>
                         <a href="./delete.php?Medicare_Number=<?= $row["Medicare_Number"] ?>&Facility_Name=<?= $row["Facility_Name"] ?>&Date=<?= $row["Date"] ?>&Start_Time=<?= $row["Start_Time"] ?>&End_Time=<?= $row["End_Time"] ?>"><button>Delete</button></a>
+                        <a href="./edit.php?Medicare_Number=<?= $row["Medicare_Number"] ?>&Facility_Name=<?= $row["Facility_Name"] ?>&Date=<?= $row["Date"] ?>&Start_Time=<?= $row["Start_Time"] ?>&End_Time=<?= $row["End_Time"] ?>"><button>Edit</button></a>
                     </td>
                 </tr>
         <?php } ?>
