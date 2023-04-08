@@ -24,9 +24,15 @@ if (
    $newWorks->bindParam(':Start_Time', $_POST['Start_Time']);
    $newWorks->bindParam(':End_Time', $_POST['End_Time']);;
    
-   if ($newWorks->execute()) {
-    header("Location: .");
+   try{
+    if ($newWorks->execute()) {
+        header("Location: .");
+       }
    }
+   catch (Exception $e){
+    echo '<script>alert("'.$e->getMessage() .'")</script>';
+   }
+   
 
 }
 ?>
