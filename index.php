@@ -13,7 +13,8 @@
     <li>
         <a href="./employees/">All Employees</a>
         <ul>
-            <li><a href="./employees/Q14.php">Doctors Working in the Province of Quebec (Q14)</a></li>
+        <li><a href="./employees/Q14.php">Doctors Working in the Province of Quebec (Q14)</a></li>
+        <li><a href="./employees/nurses_with_highest_scheduled_hours.php">Nurses with highest number of scheduled hours (Q15)</a></li>
         </ul>
     </li>
     <br>
@@ -37,6 +38,7 @@
         <ul>
             <li><a href="./infected/Q9.php/">Doctors Infected with COVID-19 in the Last 2 Weeks(Q9)</a></li>
             <li><a href="./infected/doctors_nurses_infected_covid19_3_or_more.php/">Doctors and Nurses Infected with COVID-19 at Least 3 times (Q16)</a></li>
+            <li><a href="./infected/doctors_nurses_never_infected_covid19.php/">Doctors and Nurses Infected with COVID-19 at Least 3 times (Q17)</a></li>
         </ul>
     </li>
     <br>
