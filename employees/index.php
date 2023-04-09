@@ -43,6 +43,7 @@ $statement->execute();
                 <td>Province</td>
                 <td>Postal Code</td>
                 <td>Actions</td>
+                <td>Schedules</td>
             </tr>
         </thead>
         <tbody>
@@ -65,6 +66,9 @@ $statement->execute();
 
                         <a href="./edit.php?Medicare_Number=<?= $row["Medicare_Number"] ?>"><button>Edit</button></a>
                         <a href="./delete.php?Medicare_Number=<?= $row["Medicare_Number"] ?>"><button>Delete</button></a>
+                    </td>
+                    <td>
+                        <a href="./view_schedule.php?Medicare_Number=<?= $row["Medicare_Number"] ?>"><button>View</button></a>
                     </td>
                 </tr>
 

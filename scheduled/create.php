@@ -32,8 +32,6 @@ if (
    catch (Exception $e){
     echo '<script>alert("'.$e->getMessage() .'")</script>';
    }
-   
-
 }
 ?>
 

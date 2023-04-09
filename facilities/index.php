@@ -89,6 +89,10 @@ $statement->execute();
                         <a href="./edit.php?Name=<?= $row["Name"] ?>"><button>Edit</button></a>
                         <a href="./delete.php?Name=<?= $row["Name"] ?>"><button>Delete</button></a>
                         <a href="./facility_employees.php?Name=<?= $row["Name"] ?>"><button>View employees</button></a>
+                        <br>
+                        <br>
+                        <a href="./view_on_schedule_doc_nurses.php?Name=<?= $row["Name"] ?>"><button>View doctors and nurses</button></a>
+                        <a href="./view_hours_scheduled_per_role.php?Name=<?= $row["Name"] ?>"><button>View hours per role</button></a>
                     </td>
                 </tr>
 
