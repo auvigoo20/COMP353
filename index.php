@@ -16,23 +16,32 @@
             <li><a href="./employees/Q14.php">Doctors Working in the Province of Quebec (Q14)</a></li>
         </ul>
     </li>
+    <br>
     <li>
         <a href="./facilities/">Facilities</a>
         <ul>
             <li><a href="./facilities/Q13.php/">Facilities Infected with COVID-19 in the Last 2 Weeks(Q13)</a></li>
         </ul>
     </li>
-    <li><a href="./infections/">Infections</a></li>   
+    <br>
+    <li><a href="./infections/">Infections</a></li>  
+    <br> 
     <li><a href="./vaccines/">Vaccines</a></li>
+    <br>
     <li><a href="./works/">Works</a></li>
+    <br>
     <li><a href="./manages/">Managers</a></li>
+    <br>
     <li>
         <a href="./infected/">Infected Employees</a>
         <ul>
             <li><a href="./infected/Q9.php/">Doctors Infected with COVID-19 in the Last 2 Weeks(Q9)</a></li>
+            <li><a href="./infected/doctors_nurses_infected_covid19_3_or_more.php/">Doctors and Nurses Infected with COVID-19 at Least 3 times (Q16)</a></li>
         </ul>
     </li>
+    <br>
     <li><a href="./vaccinated/">Vaccinated Employees</a></li>
+    <br>
     <li><a href="./scheduled/">Scheduled Employees</a></li>
 </ul>   
 </body>
