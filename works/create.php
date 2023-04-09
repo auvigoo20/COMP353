@@ -1,12 +1,11 @@
 <?php require_once '../database.php';
-
 // Prepare the values to populate the dropdowns
 $employeesStatement = $conn->prepare("SELECT Medicare_Number FROM hbc353_4.Employees AS Employees");
 $employeesStatement->execute();
 
-$facilitiesStatement = $conn->prepare("SELECT Name AS Facility_Name FROM hbc353_4.Facilities AS Facilities");
+$facilitiesStatement = $conn->prepare("SELECT Name AS Facility_Name 
+                                        FROM hbc353_4.Facilities AS Facilities");
 $facilitiesStatement->execute();
-
 
 if (
     isset($_POST['Medicare_Number']) &&
@@ -15,7 +14,8 @@ if (
     isset($_POST['End_Date'])
 ) {
     // Fetch the current facility
-    $currentFacilityStatement = $conn->prepare("SELECT * FROM hbc353_4.Facilities AS Facilities WHERE Facilities.Name = :Facility_Name");
+    $currentFacilityStatement = $conn->prepare("SELECT * FROM hbc353_4.Facilities AS Facilities 
+                                                WHERE Facilities.Name = :Facility_Name");
     $currentFacilityStatement->bindParam(':Facility_Name', $_POST['Facility_Name']);
     $currentFacilityStatement->execute();
     $currentFacility = $currentFacilityStatement->fetch(PDO::FETCH_ASSOC);
@@ -34,7 +34,10 @@ if (
     // check to see if maximum facility capacity has been reached
     if($capacity > $numOfEmployees ){
         // Add a new works record
-        $newWorks = $conn->prepare(("INSERT INTO hbc353_4.Works VALUES (:Medicare_Number, :Facility_Name, :Start_Date, :End_Date)"));
+        $newWorks = $conn->prepare(("INSERT INTO hbc353_4.Works 
+                                            VALUES (:Medicare_Number, :Facility_Name, 
+                                                    :Start_Date, 
+                                                    :End_Date)"));
         $newWorks->bindParam(':Medicare_Number', $_POST['Medicare_Number']);
         $newWorks->bindParam(':Facility_Name', $_POST['Facility_Name']);
         $newWorks->bindParam(':Start_Date', $_POST['Start_Date']);
@@ -62,9 +65,7 @@ if (
 </head>
 
 <body>
-
     <h1>Add new employee work record</h1>
-
     <form action="./create.php" method="post">
         <label for="Medicare_Number">Medicare Number</label>
         <select name="Medicare_Number" id="Medicare_Number">
@@ -75,9 +76,7 @@ if (
                 </option>
             <?php } ?>
         </select>
-
         <br>
-
         <label for="Facility_Name">Facility Name</label>
         <select name="Facility_Name" id="Facility_Name">
             <option value="">--Please choose an option--</option>
@@ -87,22 +86,16 @@ if (
                 </option>
             <?php } ?>
         </select>
-
         <br/>
-
         <label for="Start_Date">Start Date</label>
         <input type="date" name="Start_Date" id="Start_Date"> <br/>
 
         <label for="End_Date">End Date</label>
         <input type="date" name="End_Date" id="End_Date">
-        
-        
         <br>
-
         <button type="submit">Add</button>
     </form>
     <a href="./">Back to Vaccines list</a>
-
 </body>
 
 </html>
