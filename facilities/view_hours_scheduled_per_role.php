@@ -36,7 +36,6 @@ $statement->execute();
                     <td><?= $row["Role"] ?></td>
                     <td><?= $row["Total_Hours"] ?></td>
                 </tr>
-
             <?php } ?>
         </tbody>
     </table>
