@@ -15,7 +15,6 @@ if (
     isset($_POST["Citizenship"]) &&
     isset($_POST["Role"])
 ) {
-
     // First check if the given address exists
     $existingAddress = $conn->prepare(("SELECT * FROM hbc353_4.Address AS Address
                                         WHERE Address.Street_Address = :Street_Address AND Address.Postal_Code = :Postal_Code"));
@@ -47,8 +46,6 @@ if (
     $employee->bindParam(':Role', $_POST["Role"]);
 
     $employee->execute();
-
-
     // Create new record for Lives table
     $lives = $conn->prepare(("INSERT INTO hbc353_4.Lives(Medicare_Number, Street_Address, Postal_Code) 
                                 VALUES(:Medicare_Number, :Street_Address, :Postal_Code)"));
@@ -112,7 +109,6 @@ if (
         </select>
             
         <br>
-
         <label for="Street_Address">Street Address</label>
         <input type="text" name="Street_Address" id="Street_Address"> <br>
 
@@ -141,11 +137,7 @@ if (
 
         <label for="Postal_Code">Postal Code</label>
         <input type="text" name="Postal_Code" id="Postal_Code"> <br>
-
         <button type="submit">Add</button>
-
-
-
     </form>
     <a href="./">Back to employee list</a>
 

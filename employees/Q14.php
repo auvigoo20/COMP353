@@ -16,8 +16,7 @@ $statement = $conn->prepare("SELECT e.First_Name,
                                 ORDER BY City_Of_Residence ASC, 
                                          Total_Num_Facilities DESC;");
 $statement->execute();
-?>
-
+?> 
 
 <!DOCTYPE html>
 <html lang="en">

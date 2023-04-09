@@ -14,8 +14,9 @@ $statement = $conn->prepare("SELECT a.Province, f.Name AS Facility_Name, f.Capac
                             ORDER BY a.Province ASC, 
                                     Total_Employees_Infected ASC;");
 
-$statement->execute();
+$statement->execute(); 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

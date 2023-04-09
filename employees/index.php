@@ -12,7 +12,6 @@ $statement = $conn->prepare('SELECT Employees.Medicare_Number, First_Name, Last_
 $statement->execute();
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
