@@ -1,5 +1,5 @@
 <?php require_once '../database.php';
-
+// THIS IS A SAMPLE FILE USED FOR REFERENCE. ACTUAL CODE NEEDS TO BE RE-WRITTEN AND REFACTORED TO SATISFY THE REQUIREMENTS
 $statement = $conn->prepare("SELECT e.First_Name,  
                                     e.Last_Name, 
                                     a.City AS City_Of_Residence, 

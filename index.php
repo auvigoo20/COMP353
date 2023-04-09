@@ -35,6 +35,5 @@
     <li><a href="./vaccinated/">Vaccinated Employees</a></li>
     <li><a href="./scheduled/">Scheduled Employees</a></li>
 </ul>   
-
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php require_once '../database.php';
-
+// THIS IS A SAMPLE FILE USED FOR REFERENCE. ACTUAL CODE NEEDS TO BE RE-WRITTEN AND REFACTORED TO SATISFY THE REQUIREMENTS
 $statement = $conn->prepare("SELECT a.Province, f.Name AS Facility_Name, f.Capacity,
                                     COUNT(DISTINCT i.Medicare_Number) AS Total_Employees_Infected
                             FROM hbc353_4.Facilities f
