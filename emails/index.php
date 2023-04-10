@@ -1,6 +1,7 @@
 <?php require_once '../database.php';
 
-$statement = $conn->prepare("SELECT * FROM Email;");
+$statement = $conn->prepare("SELECT * FROM Email
+                             ORDER BY Date ASC;");
 $statement->execute();
 ?>
 
