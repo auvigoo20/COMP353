@@ -38,7 +38,7 @@
         <ul>
             <li><a href="./infected/Q9.php/">Doctors Infected with COVID-19 in the Last 2 Weeks(Q9)</a></li>
             <li><a href="./infected/doctors_nurses_infected_covid19_3_or_more.php/">Doctors and Nurses Infected with COVID-19 at Least 3 times (Q16)</a></li>
-            <li><a href="./infected/doctors_nurses_never_infected_covid19.php/">Doctors and Nurses Infected with COVID-19 at Least 3 times (Q17)</a></li>
+            <li><a href="./infected/doctors_nurses_never_infected_covid19.php/">Doctors and Nurses who have Never been Infected with Covid-19(Q17)</a></li>
         </ul>
     </li>
     <br>
