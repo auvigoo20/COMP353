@@ -10,6 +10,7 @@ $infectionsStatement = $conn->prepare("SELECT Type AS Infection_Type FROM hbc353
 $infectionsStatement->execute();
 
 
+
 if (
     isset($_POST['Medicare_Number']) &&
     isset($_POST['Infection_Type']) &&
@@ -19,10 +20,10 @@ if (
     $newWorks->bindParam(':Medicare_Number', $_POST['Medicare_Number']);
     $newWorks->bindParam(':Infection_Type', $_POST['Infection_Type']);
     $newWorks->bindParam(':Date', $_POST['Date']);
+    
     if ($newWorks->execute()) {
         header("Location: .");
     }
-
     // ADD THE EMAIL FUNCTIONALITY HERE.
     /**The system should send an email to inform/track all the doctors and
         nurses who have been in contact by having the same schedule as the infected employee.
@@ -30,7 +31,7 @@ if (
         that you have worked with in the past two weeks have been infected with COVID-19”. */
 
     if ($_POST['Infection_Type'] == "COVID-19") {
-
+        
         $date2WeeksAgo = new DateTime($_POST['Date']);
 
         // Subtract 2 weeks from the date
@@ -50,6 +51,7 @@ if (
         $facilityNames = array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
             $facilityNames[] = $row['Facility_Name'];
+            
         }
 
 
@@ -74,14 +76,16 @@ if (
             $statement->bindParam(':Facility_Name', $facilityName);
             $statement->bindParam(":infectedMedicareNumber", $_POST['Medicare_Number']);
             $statement->execute();
-
+            
             while ($row = $statement->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
+                
                 $employeesEmails[] = $row['Email'];
                 $employeesMedicareNumbers[] = $row['Medicare_Number'];
             }
 
             // Log the sent emails
             for ($x = 0; $x < count($employeesEmails); $x++) {
+                
                 sendAndLog($employeesMedicareNumbers[$x], $employeesEmails[$x], $facilityName, $subject, $body);
                 /*$emailStatement = $conn->prepare("INSERT INTO Email 
                                                   VALUES (:Medicare_Number, :Employee_Email, :Facility_Name, :Subject, :Body, :Date)");
