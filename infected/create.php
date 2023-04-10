@@ -1,4 +1,6 @@
 <?php require_once '../database.php';
+require_once "../emails/send.php";
+
 
 // Prepare the values to populate the dropdowns
 $employeesStatement = $conn->prepare("SELECT Medicare_Number FROM hbc353_4.Employees AS Employees");
@@ -80,7 +82,8 @@ if (
 
             // Log the sent emails
             for ($x = 0; $x < count($employeesEmails); $x++) {
-                $emailStatement = $conn->prepare("INSERT INTO Email 
+                sendAndLog($employeesMedicareNumbers[$x], $employeesEmails[$x], $facilityName, $subject, $body);
+                /*$emailStatement = $conn->prepare("INSERT INTO Email 
                                                   VALUES (:Medicare_Number, :Employee_Email, :Facility_Name, :Subject, :Body, :Date)");
                 $emailStatement->bindValue(":Medicare_Number", $employeesMedicareNumbers[$x]);
                 $emailStatement->bindValue(":Employee_Email", $employeesEmails[$x]);
@@ -88,7 +91,7 @@ if (
                 $emailStatement->bindParam(":Subject", $subject);
                 $emailStatement->bindParam(":Body", $body);
                 $emailStatement->bindValue(":Date", date('Y-m-d'));
-                $emailStatement->execute();
+                $emailStatement->execute();*/
 
             }
         }
