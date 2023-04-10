@@ -1,15 +1,18 @@
 <?php require_once '../database.php';
 // THIS IS A SAMPLE FILE USED FOR REFERENCE. ACTUAL CODE NEEDS TO BE RE-WRITTEN AND REFACTORED TO SATISFY THE REQUIREMENTS
-$statement = $conn->prepare("SELECT e.First_Name, e.Last_Name, i.Date, w.Facility_Name
-                            FROM hbc353_4.Employees e, hbc353_4.Infected i, hbc353_4.Works w
-                            WHERE e.Medicare_Number = i.Medicare_Number 
-                                AND e.Medicare_Number = w.Medicare_Number 
-                                AND i.Infection_Type = 'COVID-19'
-                                AND w.End_Date IS NULL 
-                                AND e.Role = 'doctor' 
-                                AND i.Date >= DATE_SUB(CURRENT_DATE(), INTERVAL 2 WEEK) 
-                            ORDER BY w.Facility_Name ASC,
-                                     e.First_Name ASC");
+$statement = $conn->prepare("SELECT E.First_Name,
+                                    E.Last_Name,
+                                    I.Date AS Date_of_Infection,
+                                    W.Facility_Name AS Facility_Name
+                            FROM Employees E,  Infected I, Works W, 
+                                (SELECT DISTINCT CURDATE() AS today) AS D
+                            WHERE E.Medicare_Number = I.Medicare_Number 
+                                AND E.Medicare_Number = W.Medicare_Number
+                                AND I.Date <=  D.today AND I.Date >= (D.Today - 14) 
+                                AND E.Role = 'Doctor'
+                                AND W.End_Date IS NULL
+                                AND I.Infection_Type = 'COVID-19'
+                            ORDER BY W.Facility_Name ASC, E.First_Name ASC;");
 $statement->execute();
 ?>
 
@@ -29,7 +32,7 @@ $statement->execute();
                 <td>First Name</td>
                 <td>Last Name</td>
                 <td>Infection Date</td>
-                <td>Facility_Name</td>
+                <td>Facility Name</td>
             </tr>
         </thead>
         <tbody>
@@ -37,7 +40,7 @@ $statement->execute();
                 <tr>
                     <td><?= $row["First_Name"] ?></td>
                     <td><?= $row["Last_Name"] ?></td>
-                    <td><?= $row["Date"] ?></td>
+                    <td><?= $row["Date_of_Infection"] ?></td>
                     <td><?= $row["Facility_Name"] ?></td>
                 </tr>
         <?php } ?>
