@@ -160,18 +160,11 @@ if (
         </select>
 
         <br>
-
         <label for="Postal_Code">Postal Code</label>
         <input type="text" name="Postal_Code" id="Postal_Code" value="<?= $facilityCurrentAddress["Postal_Code"] ?>"> <br>
-
         <button type="submit">Update</button>
-
-
 
     </form>
     <a href="./">Back to facility list</a>
-
-
 </body>
-
 </html>

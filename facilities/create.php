@@ -27,7 +27,7 @@ if (
         $newAddress->bindParam(':Postal_Code', $_POST["Postal_Code"]);                       
         $newAddress->bindParam(':City', $_POST["City"]);                       
         $newAddress->bindParam(':Province', $_POST["Province"]);        
-        
+
         $newAddress->execute();
     }
 
@@ -43,7 +43,6 @@ if (
 
     $employee->execute();
 
-
     // Create new record for Located table
     $lives = $conn->prepare(("INSERT INTO hbc353_4.Located(Facility_Name, Street_Address, Postal_Code) 
                                 VALUES(:Facility_Name, :Street_Address, :Postal_Code)"));
@@ -55,7 +54,6 @@ if (
         header("Location: .");
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -121,14 +119,9 @@ if (
         </select>
         
         <br>
-
         <label for="Postal_Code">Postal Code</label>
         <input type="text" name="Postal_Code" id="Postal_Code"> <br>
-
         <button type="submit">Add</button>
-
-
-
     </form>
     <a href="./">Back to facilities list</a>
 

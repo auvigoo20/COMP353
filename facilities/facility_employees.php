@@ -22,7 +22,6 @@ $statement->bindParam(':currentFacility', $_GET["Name"]);
 $statement->execute();
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 

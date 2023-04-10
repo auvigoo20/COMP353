@@ -1,5 +1,5 @@
 <?php require_once '../database.php';
-
+ 
 $statement = $conn->prepare("SELECT * FROM hbc353_4.Employees AS employee WHERE employee.Medicare_Number = :Medicare_Number");
 
 // This check is required because this block of code is run twice (when the page loads for the first time, and after the POST request)
@@ -80,8 +80,7 @@ if (
     $lives->bindParam(':Postal_Code', $_POST["Postal_Code"]);
     $lives->bindParam(':Medicare_Number', $_POST["Medicare_Number"]);
     $lives->execute();
-        
-
+    
     // Update the Employees entry
     $employee = $conn->prepare("UPDATE hbc353_4.Employees 
                                 SET Medicare_Number = :Medicare_Number,
@@ -110,7 +109,6 @@ if (
         header("Location: ./edit.php?Medicare_Number=" .$_POST["Medicare_Number"]);
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -184,19 +182,13 @@ if (
             <option value="SK" <?= $employeeCurrentAddress["Province"]  == 'SK' ? ' selected="selected"' : '';?>>Saskatchewan</option>
             <option value="YT" <?= $employeeCurrentAddress["Province"]  == 'YT' ? ' selected="selected"' : '';?>>Yukon</option>
         </select>
-        
+    
         <br>
-
         <label for="Postal_Code">Postal Code</label>
         <input type="text" name="Postal_Code" id="Postal_Code" value="<?= $employeeCurrentAddress["Postal_Code"] ?>"> <br>
-
         <button type="submit">Update</button>
-
-
-
     </form>
     <a href="./">Back to employee list</a>
-
 </body>
 
 </html>

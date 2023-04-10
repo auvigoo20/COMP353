@@ -1,4 +1,5 @@
 <?php require_once '../database.php';
+// THIS IS A SAMPLE FILE USED FOR REFERENCE. ACTUAL CODE NEEDS TO BE RE-WRITTEN AND REFACTORED TO SATISFY THE REQUIREMENTS
 $statement = $conn->prepare("SELECT e.First_Name, e.Last_Name, i.Date, w.Facility_Name
                             FROM hbc353_4.Employees e, hbc353_4.Infected i, hbc353_4.Works w
                             WHERE e.Medicare_Number = i.Medicare_Number 
@@ -42,7 +43,6 @@ $statement->execute();
         <?php } ?>
         </tbody>
     </table>
-    <a href="../">Back to homepage</a>
-    
+    <a href="../../">Back to homepage</a>
 </body>
 </html>
