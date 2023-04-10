@@ -1,8 +1,13 @@
 <?php
 session_start();
 require_once("../database.php");
+<<<<<<< Updated upstream
 $statement = $conn->prepare('SELECT Medicare_Number, Facility_Name, Date, Body, 
                             FROM hbc353_4.Email AS Email,
+=======
+$statement = $conn->prepare('select Medicare_Number, Employee_Email, Facility_Name, Subject, Date, Body 
+                            from hbc353_4.Email
+>>>>>>> Stashed changes
                             ');
 $statement->execute();
 
@@ -18,8 +23,12 @@ $statement->execute();
 </head>
 
 <body>
+<<<<<<< Updated upstream
     <h1>List of Employees</h1>
     <a href="./compose.php">Compose an Email</a>
+=======
+    <h1>Email Log</h1>
+>>>>>>> Stashed changes
 
     <table border="1">
         <thead >
@@ -27,7 +36,13 @@ $statement->execute();
                 <td>Medicare Number</td>
                 <td>Facility Name</td>
                 <td>Date</td>
+<<<<<<< Updated upstream
                 <td>Facility Name</td>
+=======
+                <td>Email</td>
+                <td>Subject</td>
+                <td>Preview</td>
+>>>>>>> Stashed changes
             </tr>
         </thead>
         <tbody>
@@ -35,7 +50,14 @@ $statement->execute();
                 <tr>
                     <td><?= $row["Medicare_Number"] ?></td>
                     <td><?= $row["Facility_Name"] ?></td>
+<<<<<<< Updated upstream
                     <td><?= $row["Body"] ?></td>
+=======
+                    <td><?= $row["Date"] ?></td>
+                    <td><?= $row["Employee_Email"] ?></td>
+                    <td><?= $row["Subject"] ?></td>
+                    <td><?= substr($row["Body"], 0 ,80) ?></td>
+>>>>>>> Stashed changes
                 </tr>
 
             <?php } ?>
