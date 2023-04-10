@@ -10,19 +10,22 @@ $statement->execute();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS file -->
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <title>Infections</title>
 </head>
 <body>
 
-<h1>List of Infections</h1>
-    <a href="./create.php">Add a new infection</a>
+<div class="container mt-5">
+    <h1>List of Infections</h1>
+    <a class="btn btn-primary" href="./create.php">Add a new infection</a>
 
-    <table border="1">
-        <thead >
+    <table class="table mt-4">
+        <thead class="thead-dark">
             <tr>
-                <td>Type</td>
-                <td>Description</td>
-                <td>Actions</td>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -31,16 +34,18 @@ $statement->execute();
                     <td><?= $row["Type"] ?></td>
                     <td><?= $row["Description"] ?></td>
                     <td>
-                    <a href="./show.php?Type=<?= $row["Type"] ?>"><button>Show</button></a>
-                        <a href="./edit.php?Type=<?= $row["Type"] ?>"><button>Edit</button></a>
-                        <a href="./delete.php?Type=<?= $row["Type"] ?>"><button>Delete</button></a>
+                        <a class="btn btn-primary" href="./show.php?Type=<?= $row["Type"] ?>">Show</a>
+                        <a class="btn btn-secondary" href="./edit.php?Type=<?= $row["Type"] ?>">Edit</a>
+                        <a class="btn btn-danger" href="./delete.php?Type=<?= $row["Type"] ?>">Delete</a>
                     </td>
                 </tr>
-
             <?php } ?>
         </tbody>
     </table>
-    <a href="../">Back to homepage</a>
-    
+    <a href="../" class="btn btn-link">Back to homepage</a>
+</div>
+
+<!-- Bootstrap JS file (optional) -->
+<script src="../bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

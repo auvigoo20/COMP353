@@ -46,60 +46,67 @@ $statement->execute();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS file -->
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <title>Facilities</title>
 </head>
 
 <body>
-    <h1>List of Facilities</h1>
-    <a href="./create.php">Add a new facility</a>
+    <div style="margin-left:5px">
+        <h1>List of Facilities</h1>
+        <a href="./create.php" class="btn btn-primary mb-3">Add a new facility</a>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <td>Name</td>
-                <td>Street Address</td>
-                <td>City</td>
-                <td>Province</td>
-                <td>Postal Code</td>
-                <td>Phone Number</td>
-                <td>Web Address</td>
-                <td>Type</td>
-                <td>Capacity</td>
-                <td>Manager Name</td>
-                <td>Number of Employees</td>                
-                <td>Actions</td>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while ($row = $statement->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) { ?>
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td><?= $row["Name"] ?></td>
-                    <td><?= $row["Street_Address"] ?></td>
-                    <td><?= $row["City"] ?></td>
-                    <td><?= $row["Province"] ?></td>
-                    <td><?= $row["Postal_Code"] ?></td>
-                    <td><?= $row["Phone_Number"] ?></td>
-                    <td><?= $row["Web_Address"] ?></td>
-                    <td><?= $row["Type"] ?></td>
-                    <td><?= $row["Capacity"] ?></td>
-                    <td><?= $row["Manager_Name"] ?></td>
-                    <td><?= $row["Number_of_Employees"] ?></td>
-                    <td>
-                        <a href="./show.php?Name=<?= $row["Name"] ?>"><button>Show</button></a>
-                        <a href="./edit.php?Name=<?= $row["Name"] ?>"><button>Edit</button></a>
-                        <a href="./delete.php?Name=<?= $row["Name"] ?>"><button>Delete</button></a>
-                        <a href="./facility_employees.php?Name=<?= $row["Name"] ?>"><button>View employees</button></a>
-                        <br>
-                        <br>
-                        <a href="./view_on_schedule_doc_nurses.php?Name=<?= $row["Name"] ?>"><button>View doctors and nurses</button></a>
-                        <a href="./view_hours_scheduled_per_role.php?Name=<?= $row["Name"] ?>"><button>View hours per role</button></a>
-                    </td>
+                    <th>Name</th>
+                    <th>Street Address</th>
+                    <th>City</th>
+                    <th>Province</th>
+                    <th>Postal Code</th>
+                    <th>Phone Number</th>
+                    <th>Web Address</th>
+                    <th>Type</th>
+                    <th>Capacity</th>
+                    <th>Manager Name</th>
+                    <th>Number of Employees</th>                
+                    <th>Actions</th>
                 </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = $statement->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) { ?>
+                    <tr>
+                        <td><?= $row["Name"] ?></td>
+                        <td><?= $row["Street_Address"] ?></td>
+                        <td><?= $row["City"] ?></td>
+                        <td><?= $row["Province"] ?></td>
+                        <td><?= $row["Postal_Code"] ?></td>
+                        <td><?= $row["Phone_Number"] ?></td>
+                        <td><?= $row["Web_Address"] ?></td>
+                        <td><?= $row["Type"] ?></td>
+                        <td><?= $row["Capacity"] ?></td>
+                        <td><?= $row["Manager_Name"] ?></td>
+                        <td><?= $row["Number_of_Employees"] ?></td>
+                        <td>
+                            <a href="./show.php?Name=<?= $row["Name"] ?>" class="btn btn-primary btn-sm">Show</a>
+                            <a href="./edit.php?Name=<?= $row["Name"] ?>" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="./delete.php?Name=<?= $row["Name"] ?>" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="./facility_employees.php?Name=<?= $row["Name"] ?>" class="btn btn-info btn-sm">View employees</a>
+                            <br>
+                            <br>
+                            <a href="./view_on_schedule_doc_nurses.php?Name=<?= $row["Name"] ?>" class="btn btn-secondary btn-sm">View doctors and nurses</a>
+                            <a href="./view_hours_scheduled_per_role.php?Name=<?= $row["Name"] ?>" class="btn btn-dark btn-sm">View hours per role</a>
+                        </td>
+                    </tr>
 
-            <?php } ?>
-        </tbody>
-    </table>
-    <a href="../">Back to homepage</a>
+                <?php } ?>
+            </tbody>
+        </table>
+        <a href="../" class="btn btn-primary mt-3">Back to homepage</a>
+    </div>
+
+    <!-- Bootstrap JS file (optional) -->
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>
