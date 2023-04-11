@@ -13,43 +13,24 @@ if (
     isset($_POST['Start_Date']) &&
     isset($_POST['End_Date'])
 ) {
-    // Fetch the current facility
-    $currentFacilityStatement = $conn->prepare("SELECT * FROM hbc353_4.Facilities AS Facilities 
-                                                WHERE Facilities.Name = :Facility_Name");
-    $currentFacilityStatement->bindParam(':Facility_Name', $_POST['Facility_Name']);
-    $currentFacilityStatement->execute();
-    $currentFacility = $currentFacilityStatement->fetch(PDO::FETCH_ASSOC);
-    $capacity = $currentFacility['Capacity'];
-
-    // Fetch the current number of employees working in the selected facility
-    $worksStatement = $conn->prepare("SELECT COUNT(Medicare_Number) AS 'numOfEmployees'
-                                      FROM hbc353_4.Works
-                                      WHERE Facility_Name = :Facility_Name AND End_Date IS NULL
-                                      GROUP BY Facility_Name");
-    $worksStatement->bindParam(':Facility_Name', $_POST['Facility_Name']);
-    $worksStatement->execute();
-    $works = $worksStatement->fetch(PDO::FETCH_ASSOC);
-    $numOfEmployees = $works['numOfEmployees'];
-
-    // check to see if maximum facility capacity has been reached
-    if($capacity > $numOfEmployees ){
-        // Add a new works record
-        $newWorks = $conn->prepare(("INSERT INTO hbc353_4.Works 
+    $newWorks = $conn->prepare(("INSERT INTO hbc353_4.Works 
                                             VALUES (:Medicare_Number, :Facility_Name, 
                                                     :Start_Date, 
                                                     :End_Date)"));
-        $newWorks->bindParam(':Medicare_Number', $_POST['Medicare_Number']);
-        $newWorks->bindParam(':Facility_Name', $_POST['Facility_Name']);
-        $newWorks->bindParam(':Start_Date', $_POST['Start_Date']);
-        if($_POST['End_Date'] == ''){
-            $_POST['End_Date'] = null;
-        }
-        $newWorks->bindParam(':End_Date', $_POST['End_Date']);
+    $newWorks->bindParam(':Medicare_Number', $_POST['Medicare_Number']);
+    $newWorks->bindParam(':Facility_Name', $_POST['Facility_Name']);
+    $newWorks->bindParam(':Start_Date', $_POST['Start_Date']);
+    if ($_POST['End_Date'] == '') {
+        $_POST['End_Date'] = null;
+    }
+    $newWorks->bindParam(':End_Date', $_POST['End_Date']);
+
+    try {
         if ($newWorks->execute()) {
-        header("Location: .");
+            header("Location: .");
         }
-    }else{
-        echo '<script>alert("Capacity is reached")</script>';
+    } catch (Exception $e) {
+        echo '<script>alert("' . $e->getMessage() . '")</script>';
     }
 }
 ?>
@@ -70,9 +51,9 @@ if (
         <label for="Medicare_Number">Medicare Number</label>
         <select name="Medicare_Number" id="Medicare_Number">
             <option value="">--Please choose an option--</option>
-            <?php while($row = $employeesStatement->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) { ?>
-                <option value="<?php echo $row["Medicare_Number"];?>">
-                    <?php echo $row["Medicare_Number"];?>
+            <?php while ($row = $employeesStatement->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) { ?>
+                <option value="<?php echo $row["Medicare_Number"]; ?>">
+                    <?php echo $row["Medicare_Number"]; ?>
                 </option>
             <?php } ?>
         </select>
@@ -80,15 +61,15 @@ if (
         <label for="Facility_Name">Facility Name</label>
         <select name="Facility_Name" id="Facility_Name">
             <option value="">--Please choose an option--</option>
-            <?php while($row = $facilitiesStatement->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) { ?>
-                <option value="<?php echo $row["Facility_Name"];?>">
-                    <?php echo $row["Facility_Name"];?>
+            <?php while ($row = $facilitiesStatement->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) { ?>
+                <option value="<?php echo $row["Facility_Name"]; ?>">
+                    <?php echo $row["Facility_Name"]; ?>
                 </option>
             <?php } ?>
         </select>
-        <br/>
+        <br />
         <label for="Start_Date">Start Date</label>
-        <input type="date" name="Start_Date" id="Start_Date"> <br/>
+        <input type="date" name="Start_Date" id="Start_Date"> <br />
 
         <label for="End_Date">End Date</label>
         <input type="date" name="End_Date" id="End_Date">
