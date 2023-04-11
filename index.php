@@ -40,7 +40,7 @@
             </li>
             <li class="mb-3"><a href="./vaccinated/">Vaccinated Employees</a></li>
             <li class="mb-3"><a href="./scheduled/">Scheduled Employees</a></li>
-            <li class="mb-3"><a href="./emails/">Emails sent</a></li>
+            <li class="mb-3"><a href="./emails/">Emails logged</a></li>
         </ul>
     </div>   
     <!-- Bootstrap JS file (optional) -->
